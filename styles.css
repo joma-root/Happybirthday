@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=UnifrakturMaguntia&display=swap');
+
+/* ===== CORE STRUCTURE ===== */
+body {
+    min-height: 100vh;
+    margin: 0;
+    max-height: 100vh;
+    overflow: hidden;
+    background-color: #f5f1e6;
+    font-family: 'Times New Roman', serif;
+}
+
+img {
+    border-radius: .5rem;
+    border: 1px solid #8b5a2b !important;
+    box-shadow: 0 3px 6px rgba(139, 90, 43, 0.2) !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.centered {
+    margin: auto;
+    width: max-content;
+}
+
+.flipbook {
+    margin: 3rem auto;
+    width: 400px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.flipbook .leaf {
+    position: absolute;
+    transform-style: preserve-3d;
+    height: 100%;
+    width: 50%;
+    left: 50%;
+    transition: transform 1s;
+    transform: rotate3d(0, 1, 0, 0deg);
+    transform-origin: left 0px;
+}
+
+.flipbook .leaf .page {
+    transform-style: preserve-3d;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: #f8f3e6;
+    border: 1px solid #8b5a2b;
+    padding: 0.5rem;
+    overflow: hidden;
+}
+
+.flipbook .leaf .page.front {
+    transform: rotate3d(0, 1, 0, 0deg) translate3d(0, 0, 0.1px);
+    border-right: 2px solid #6b4c2a;
+}
+
+.flipbook .leaf .page.front:not(.external) {
+    box-shadow: inset 5px 0 5px -5px rgba(139, 90, 43, 0.5);
+}
+
+.flipbook .leaf .page.back {
+    transform: rotate3d(0, 1, 0, 180deg) translate3d(0, 0, 0.1px);
+    border-left: 2px solid #6b4c2a;
+}
+
+.flipbook .leaf .page.back:not(.external) {
+    box-shadow: inset -5px 0 5px -5px rgba(139, 90, 43, 0.5);
+}
+
+/* ===== VINTAGE TYPOGRAPHY ===== */
+h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.5rem;
+    color: #5c3a21;
+    text-shadow: 1px 1px 2px rgba(145, 92, 43, 0.2);
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 700;
+    text-transform: none;
+}
+
+h2,
+h3 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: #5e3a20;
+    text-shadow: 1px 1px 2px rgba(139, 90, 43, 0.2);
+}
+
+p,
+.text {
+    color: #5c3a20;
+    line-height: 1.2;
+    font-size: 0.75rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ===== PAGE ELEMENTS ===== */
+.disabled {
+    user-select: none;
+    opacity: 0.6;
+}
+
+.title {
+    text-align: center;
+    width: 100%;
+    padding-top: 2rem;
+}
+
+.page.front {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.page.back {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.pageNumber {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 0.9rem;
+    color: #8b5a2b;
+    position: absolute;
+    bottom: 0.5rem;
+}
+
+.front .pageNumber {
+    right: 0.75rem;
+}
+
+.back .pageNumber {
+    left: 0.75rem;
+}
+
+.birthday-date {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-family: 'Cinzel Decorative', cursive;
+    color: #f8f3e6;
+    background-color: #8b5a2b;
+    font-size: 0.4rem;
+    font-style: italic;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.contents-row {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.contents-row .spacer {
+    flex: 1 1;
+    height: 1rem;
+    border-bottom: 1px dashed #8b5a2b;
+}
+
+/* ===== CONTROLS ===== */
+button {
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+    margin-block: 4px;
+    transition: .5s;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+button:hover {
+    translate: 0 -5px;
+    box-shadow: 0 5px 5px rgba(139, 90, 43, 0.4);
+}
+
+#prevPage,
+#nextPage {
+    background-color: #8b5a2b;
+    color: #f8f3e6;
+}
+
+/* ===== FOOTER ===== */
+figure {
+    bottom: 1rem;
+    position: absolute;
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+}
+
+figcaption a {
+    color: #8b5a2b !important;
+    text-decoration: none;
+    margin-left: .5rem;
+    font-size: 1.2rem;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+figcaption a:hover {
+    text-decoration: underline;
+}
+
+figcaption a:active {
+    font-size: 1rem;
+}
+
+/* ===== SPECIAL STATES ===== */
+body[onload] {
+    transform: scale(1.5);
+    transform-origin: center top;
+}
+
+body[onload] .left:nth-child(1) {
+    transform: rotate3d(0, 1, 0, -128deg) !important;
+}
+
+body[onload] .left:nth-child(2) {
+    transform: rotate3d(0, 1, 0, -70deg) !important;
+}
+
+body[onload] .left:nth-child(3) {
+    transform: rotate3d(0, 1, 0, -40deg) !important;
+}
+
+body[onload] div.leaf:nth-child(4)>div:nth-child(1) {
+    background-color: #e76f51;
+}
+
+.cd__intro {
+    background-color: #c0e;
+}
+
+/* ===== MUSIC PLAYER ===== */
+audio {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    opacity: 0.8;
+    z-index: 1000;
+}
+
+audio:hover {
+    opacity: 1;
+}
+
+/* ===== RESPONSIVE FIX FOR MOBILE ===== */
+@media (max-width: 768px) {
+    .flipbook {
+        width: 95vw;
+        height: 65vh;
+    }
+
+    .page {
+        padding: 1rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+
+    h2,
+    h3 {
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+    }
+
+    p,
+    .text {
+        font-size: 0.75rem;
+        line-height: 1.2;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    .pageNumber {
+        font-size: 0.6rem;
+    }
+
+    .birthday-date {
+        font-size: 0.6rem;
+        padding: 2px 5px;
+    }
+
+    button {
+        font-size: 0.8rem;
+    }
+}
